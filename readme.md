@@ -1,10 +1,10 @@
-### Write-up: Nocturnal from Hack The Box (Linux, easy machine)
+# Write-up: Nocturnal from Hack The Box (Linux, easy machine)
 
-# I started with a very simple nmap scan (nmap -sC -sV @ip):
+### I started with a very simple nmap scan (nmap -sC -sV @ip):
 
 ![htb](https://github.com/user-attachments/assets/32684602-99fa-453d-baea-af0ae210f711)
 
-# Trying to acces port 80 (web app)
+### Trying to acces port 80 (web app)
 
 I tried accessing the website in my browser, but it did not let me access the file (because of DNS or something like that)
 
@@ -23,7 +23,7 @@ And make sure to replace <cookies_here> with the cookies (inspect > storage > lo
 After scanning the names I got back: admin, amanda, tobias.
 
 
-# Continuing with the information I had found
+### Continuing with the information I had found
 
 I found that the website (when authorized) allowed you to access /view.php (which did not give me any information, but it had a custom UI, so it meant something). If I assigned values for user and file, it would show me what user the files had. I did not even have to specify which file. It would tell me if that file existed, and regardless of that answer I could see other files of that user.
 
@@ -37,13 +37,13 @@ I tried logging in with the details provided (into the web app), and succesfully
 
 I then saw that there was a admin panel option for amanda.
 
-# Admin panel
+### Admin panel
 
 When I went to the admin panel, I saw a field where if I entered a password, it would give me a backup of the files of the web app. So I entered the same login credentials provided from the mail (privacy.odt) and succesfully got the zip.
 
 I analyzed the php files, and could notice that there were many input fields to inject some SQL into. So thats what I did!
 
-# SQL-injection
+### SQL-injection
 
 I started with running this into the backup files field:
 
@@ -100,7 +100,7 @@ Which means that the commands were working!
 
 After running some other commands I got access to the userIds, and md5 hashes of the users. I decrypted the hashes with crackstation and got access to tobias account.
 
-# Access to tobias account
+### Access to tobias account
 
 I continued in a new terminal with the following:
 
